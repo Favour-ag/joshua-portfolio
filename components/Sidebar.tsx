@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -17,11 +18,23 @@ const navItems = [
 ];
 
 const Sidebar: React.FC = () => {
+  const { theme, resolvedTheme } = useTheme();
   const pathname = usePathname();
+
+  // Fix hydration issue by ensuring theme is correctly detected
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // Check if dark mode is active (fallback to default dark mode)
+  const isDark = mounted && (theme === "dark" || resolvedTheme === "dark");
 
   return (
     <div className="absolute top-1/2 left-4 transform -translate-y-1/2 flex flex-col space-y-6">
-      <div className="flex flex-col items-center space-y-4 px-3 py-6 border rounded-full bg-[#080E14] text-white dark:bg-[#080E14] dark:text-white">
+      <div
+        className={`flex flex-col items-center space-y-4 px-3 py-6 border rounded-full transition-colors duration-300 ${
+          isDark ? "bg-[#080E14] text-white" : "bg-gray-100 text-black"
+        }`}
+      >
         {/* Desktop Navigation */}
         <nav className="hidden md:flex flex-col">
           <div className="space-y-8">
@@ -37,7 +50,7 @@ const Sidebar: React.FC = () => {
                   href={item.href}
                   className={cn(
                     "p-3 rounded-lg transition-colors hover:bg-zinc-800",
-                    pathname === item.href ? "bg-zinc-800" : "text-zinc-400"
+                    pathname === item.href ? "text-white" : "text-zinc-400"
                   )}
                 >
                   <div className="flex flex-col items-center">
