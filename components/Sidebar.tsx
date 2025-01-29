@@ -1,7 +1,6 @@
 "use client";
 
 import { useTheme } from "next-themes";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -18,19 +17,13 @@ const navItems = [
 ];
 
 const Sidebar: React.FC = () => {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
   const pathname = usePathname();
 
   return (
     <div className="absolute top-1/2 left-4 transform -translate-y-1/2 flex flex-col space-y-6">
-      <div
-        className={`flex flex-col items-center space-y-4 px-3 py-6 border rounded-full ${
-          isDark ? "bg-[#080E14] text-white" : "bg-gray-100 text-black"
-        }`}
-      >
+      <div className="flex flex-col items-center space-y-4 px-3 py-6 border rounded-full bg-[#080E14] text-white dark:bg-[#080E14] dark:text-white">
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex flex-col ">
+        <nav className="hidden md:flex flex-col">
           <div className="space-y-8">
             <div className="flex justify-center">
               <Link href="/" className="text-xl font-bold pt-4">
@@ -47,7 +40,7 @@ const Sidebar: React.FC = () => {
                     pathname === item.href ? "bg-zinc-800" : "text-zinc-400"
                   )}
                 >
-                  <div className="flex flex-col items-center ">
+                  <div className="flex flex-col items-center">
                     <item.icon className="w-6 h-6" />
                     <span className="text-sm">{item.label}</span>
                   </div>
