@@ -29,7 +29,7 @@ const Sidebar: React.FC = () => {
   const isDark = mounted && (theme === "dark" || resolvedTheme === "dark");
 
   return (
-    <div className="absolute top-1/2 left-4 transform -translate-y-1/2 flex flex-col space-y-6">
+    <div className="absolute top-1/2 left-4 transform -translate-y-1/2 flex flex-col space-y-6 dark:bg-[#060A0F] text-black dark:text-white">
       <div
         className={`flex flex-col items-center space-y-4 px-3 py-6 border rounded-full transition-colors duration-300 ${
           isDark ? "bg-[#080E14] text-white" : "bg-gray-100 text-black"
