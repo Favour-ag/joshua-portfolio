@@ -40,7 +40,7 @@ const HeroSection: React.FC = () => {
                   JOSHUA
                 </Link>
               </div>
-              <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center ">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
@@ -58,7 +58,25 @@ const HeroSection: React.FC = () => {
                 ))}
               </div>
             </div>
-            <div className="flex justify-center pb-8">
+            <div className="flex flex-col items-center justify-center pb-8 gap-y-4 mt-10">
+              <div className="flex gap-2">
+                <Link
+                  href="https://behance.net"
+                  target="_blank"
+                  className="text-zinc-400 hover:text-white"
+                >
+                  Be
+                </Link>
+              </div>
+              <div className="flex gap-2">
+                <Link
+                  href="https://behance.net"
+                  target="_blank"
+                  className="text-zinc-400 hover:text-white"
+                >
+                  Be
+                </Link>
+              </div>
               <div className="flex gap-2">
                 <Link
                   href="https://behance.net"

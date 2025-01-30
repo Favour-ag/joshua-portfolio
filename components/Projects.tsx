@@ -1,44 +1,120 @@
-import Link from "next/link";
-import { ProjectCard } from "@/components/ProjectCard";
+"use client";
 
-const projects = [
+import Image from "next/image";
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
+import { useState } from "react";
+
+interface ProjectCardProps {
+  title: string;
+  role: string;
+  duration: string;
+  image: string;
+  description: string;
+  link: string; // New: Link to project page
+}
+
+const projects: ProjectCardProps[] = [
   {
-    title: "AI-POWERED TEACHER DASHBOARD",
-    slug: "ai-powered-teacher-dashboard",
-    role: "UX Designer",
-    duration: "4 Months",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    title: "Web3 AI Code Builder",
+    role: "Full-Stack Developer",
+    duration: "Jan 2024 - Present",
+    image: "/images/web3-project.png",
     description:
-      "Instructors face increasing challenges in managing student performance...",
+      "An AI-powered tool that helps beginners learn Web3 coding efficiently.",
+    link: "/projects/web3-ai-code-builder",
   },
   {
-    title: "CIPHER",
-    slug: "cipher",
-    role: "UX Designer",
-    duration: "4 Months",
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800",
-    description: "A project focusing on secure communication and encryption...",
+    title: "E-commerce Platform",
+    role: "Frontend Developer",
+    duration: "Aug 2023 - Dec 2023",
+    image: "/images/ecommerce.png",
+    description:
+      "Built a scalable and modern e-commerce platform with seamless UI/UX.",
+    link: "/projects/ecommerce-platform",
   },
   {
-    title: "BOOKTOPIA",
-    slug: "booktopia",
-    role: "UX Designer",
-    duration: "4 Months",
-    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800",
-    description: "An innovative book marketplace for avid readers...",
+    title: "UI/UX Design Showcase",
+    role: "Product Designer",
+    duration: "2023",
+    image: "/images/uiux-showcase.png",
+    description:
+      "A curated collection of my best UI/UX design projects and case studies.",
+    link: "/projects/uiux-showcase",
   },
 ];
 
-export default function Projects() {
+function ProjectCard({
+  title,
+  role,
+  duration,
+  image,
+  description,
+  link,
+}: ProjectCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="px-6 md:px-16 pb-32">
-      <div className="space-y-32">
-        {projects.map((project, index) => (
-          <Link key={index} href={`/projects/${project.slug}`}>
-            <ProjectCard {...project} />
-          </Link>
-        ))}
-      </div>
+    <div className="space-y-12">
+      <Link href={link} passHref>
+        <div
+          className="grid md:grid-cols-12 gap-8  transition-transform duration-300 hover:scale-105 cursor-pointer"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Project Info Card */}
+          <Card className="md:col-span-4 bg-zinc-900 border-zinc-800 p-6 shadow-lg ">
+            <h3 className="text-xl font-bold mb-6 text-white">{title}</h3>
+            <div className="space-y-2 text-zinc-400">
+              <p>Role: {role}</p>
+              <p>Duration: {duration}</p>
+            </div>
+          </Card>
+
+          {/* Project Image & Hover Overlay */}
+          <div className="md:col-span-8 relative rounded-lg overflow-hidden group">
+            <div className="relative w-full h-[300px] md:h-[400px]">
+              <Image
+                src={image}
+                alt={title}
+                fill
+                className="object-cover rounded-lg transition-transform duration-300 group-hover:scale-110"
+              />
+            </div>
+
+            {/* Overlay with Description */}
+            <div
+              className={`absolute inset-0 flex items-center justify-center bg-black/80 text-white text-center p-6 opacity-0 transition-opacity duration-300 ${
+                isHovered ? "opacity-100" : ""
+              }`}
+            >
+              <p className="text-lg">{description}</p>
+            </div>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 }
+
+export default function Projects() {
+  return (
+    <section
+      id="projects"
+      className="py-20 bg-white dark:bg-[#060A0F] text-black dark:text-white"
+    >
+      <div className="container mx-auto px-6">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+          Projects I've Built
+        </h2>
+
+        <div className="space-y-16">
+          {projects.map((project, index) => (
+            <ProjectCard key={index} {...project} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+//////////////////////
