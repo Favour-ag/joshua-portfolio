@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Card } from "@/components/ui/card";
-import ProjectImage from "@/components/projects/ProjectImage";
-import ProjectInfo from "@/components/projects/ProjectInfo";
+import ProjectImage from "@/components/projectsComponents/ProjectImage";
+import ProjectInfo from "@/components/projectsComponents/ProjectInfo";
 
 interface ProjectCardProps {
   title: string;

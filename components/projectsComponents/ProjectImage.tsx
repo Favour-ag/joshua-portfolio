@@ -6,7 +6,6 @@ interface ProjectImageProps {
   description: string;
   isHovered: boolean;
 }
-
 export default function ProjectImage({
   image,
   title,
